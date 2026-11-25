@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <!-- viewport-fit=cover: aproveita a tela toda do iPhone -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#4A3025" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="ECOFFEE" />
+  <title>ECOFFEE · Controle de Avaliadores</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+
+    <!-- CABEÇALHO -->
+    <header class="header">
+      <h1 class="brand">ECOFFEE</h1>
+      <p class="subtitle">Controle de Avaliadores</p>
+      <p class="description">
+        Monitoramento de visitas e avaliações durante a apresentação científica.
+      </p>
+    </header>
+
+    <!-- PAINEL PRINCIPAL: TOTAL GERAL -->
+    <section class="card total-card" aria-live="polite">
+      <span class="total-label">Total de avaliadores</span>
+      <span class="total-number" id="totalNumber">0</span>
+    </section>
+
+    <!-- NOVO REGISTRO -->
+    <section class="card">
+      <h2 class="section-title">Novo registro</h2>
+
+      <label class="field-label" for="dateInput">Data da apresentação</label>
+      <input type="date" id="dateInput" class="date-input" />
+
+      <button type="button" id="addBtn" class="btn btn-primary">
+        + Adicionar avaliador
+      </button>
+
+      <button type="button" id="undoBtn" class="btn btn-ghost">
+        ↩ Desfazer último desta data
+      </button>
+    </section>
+
+    <!-- HISTÓRICO POR DIA -->
+    <section class="history">
+      <h2 class="section-title">Avaliadores por dia</h2>
+
+      <!-- Mensagem quando não há registros -->
+      <div id="emptyState" class="empty-state">
+        <span class="empty-icon">☕</span>
+        <p>Nenhum avaliador registrado ainda.</p>
+        <p class="empty-hint">Escolha a data e toque em “+ Adicionar avaliador”.</p>
+      </div>
+
+      <!-- Cards dos dias são inseridos aqui pelo JavaScript -->
+      <div id="daysList" class="days-list"></div>
+    </section>
+
+    <!-- ZERAR TUDO -->
+    <footer class="footer">
+      <button type="button" id="resetBtn" class="btn btn-danger-outline">
+        Zerar todos os registros
+      </button>
+    </footer>
+  </main>
+
+  <!-- MODAL DE CONFIRMAÇÃO (reutilizado para excluir e zerar) -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle" class="modal-title"></h3>
+      <p id="modalMessage" class="modal-message"></p>
+      <div class="modal-actions">
+        <button type="button" id="modalCancel" class="btn btn-ghost">Cancelar</button>
+        <button type="button" id="modalConfirm" class="btn btn-danger">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVISO RÁPIDO (toast) -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
